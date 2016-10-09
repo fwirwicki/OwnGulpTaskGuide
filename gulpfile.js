@@ -7,7 +7,7 @@ var browserSync = require('browser-sync');
 gulp.task('browser-sync', function() {
   browserSync({
     server: {
-       baseDir: "app/"
+       baseDir: "./"
     }
   });
 });
@@ -32,6 +32,6 @@ gulp.task('styles', function(){
 
 gulp.task('default', ['browser-sync'], function(){
   gulp.watch("app/css/**/*.css", ['styles']);
-  gulp.watch("app/**/*.html", ['bs-reload']);
+  gulp.watch("app/*.html", ['bs-reload']);
   gulp.watch("*.html", ['bs-reload']);
 });
