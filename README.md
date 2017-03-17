@@ -1,2 +1,4 @@
-# OwnGulpTaskGuide
-My own Gulp-task guide and directory structure
+My own Gulp-tasks for writing a simple websites with HTML, CSS, JS.
+
+BrowserSync
+Autoprefixer
