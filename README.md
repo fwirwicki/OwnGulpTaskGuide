@@ -1,4 +1,2 @@
-My own Gulp-tasks for writing a simple websites with HTML, CSS, JS.
-
-BrowserSync
-Autoprefixer
+My boilerplate Gulp configuration.
+Prepared for gulp 4.0

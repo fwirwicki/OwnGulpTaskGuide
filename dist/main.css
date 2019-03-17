@@ -1,4 +1,4 @@
-*, ::before, ::after {
-  box-sizing: content-box;
-  margin: 0;
-  padding: 0; }
+body {
+  -webkit-transition: all 250ms ease-in-out;
+  transition: all 250ms ease-in-out;
+  background: lightblue; }
