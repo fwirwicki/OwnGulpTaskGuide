@@ -6,8 +6,9 @@ const sass = require("gulp-sass");
 const autoprefixer = require("gulp-autoprefixer");
 const babel = require("gulp-babel");
 const browserSync = require("browser-sync");
+const notify = require("gulp-notify");
 
-function sync(cb) {
+function serve(cb) {
     browserSync.init({
         server: {
             baseDir: "./"
@@ -22,7 +23,12 @@ function reload(cb) {
 }
 
 function errorHandler(err) {
-    console.log(err.message);
+    notify.onError({
+        title: 'Gulp',
+        subtitle: 'Failure!',
+        message: 'Error: <%= error.message %>',
+        sound: 'Beep'
+    })(err);
     this.emit("end");
 }
 
@@ -34,9 +40,13 @@ function watchers() {
 
 function styles() {
     return src(["assets/styles/main.scss"])
-        .pipe(plumber())
-        .pipe(sass().on("error", errorHandler))
-        .pipe(autoprefixer("last 2 version"))
+        .pipe(plumber({
+            errorHandler
+        }))
+        .pipe(sass().on("error", sass.logError))
+        .pipe(autoprefixer({
+            browsers: ['last 4 version', 'ie 11', 'chrome > 39', 'firefox > 24']
+        }))
         .pipe(dest("dist/"))
         .pipe(browserSync.stream());
 }
@@ -51,4 +61,8 @@ function scripts() {
         .pipe(browserSync.stream());
 }
 
-exports.default = series(sync, styles, scripts, watchers);
+exports.styles = styles;
+exports.scripts = scripts;
+exports.watch = watchers;
+
+exports.default = series(serve, styles, scripts, watchers);
